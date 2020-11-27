@@ -7,7 +7,7 @@ module Danger
   #
   # Add a script step:
   #
-  # ``` shell
+  # ```shell
   #   #!/usr/bin/env bash
   #   bundle install
   #   bundle exec danger
@@ -36,7 +36,7 @@ module Danger
     end
 
     def initialize(env)
-      self.pull_request_id = env["SYSTEM_PULLREQUEST_PULLREQUESTID"]
+      self.pull_request_id = env["SYSTEM_PULLREQUEST_PULLREQUESTNUMBER"] || env["SYSTEM_PULLREQUEST_PULLREQUESTID"]
       self.repo_url = env["BUILD_REPOSITORY_URI"]
       self.repo_slug = env["BUILD_REPOSITORY_NAME"]
     end

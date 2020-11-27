@@ -95,7 +95,7 @@ RSpec.describe Danger::Dangerfile::DSL, host: :github do
         allow_any_instance_of(Danger::GitRepo).to receive(:origins).and_return("https://gitlab.com/author/repo.github.io.git")
 
         download_url = "https://gitlab.com/api/v4/projects/1/repository/files/Dangerfile/raw?private_token=a86e56d46ac78b&ref=master"
-        download_url_custom = "https://gitlab.com/api/v4/projects/1/repository/files/path/to/Dangerfile/raw?private_token=a86e56d46ac78b&ref=custom-branch"
+        download_url_custom = "https://gitlab.com/api/v4/projects/1/repository/files/path%2Fto%2FDangerfile/raw?private_token=a86e56d46ac78b&ref=custom-branch"
         mock_dangerfile = "message('OK')"
 
         stub_request(:get, download_url).to_return(status: 200, body: mock_dangerfile)
@@ -132,6 +132,13 @@ RSpec.describe Danger::Dangerfile::DSL, host: :github do
 
       expect(File).to receive(:open).with(Pathname.new("/gems/foo/bar/Dangerfile"), "r:utf-8").and_return(inner_dangerfile)
       expect(Gem::Specification).to receive_message_chain(:find_by_name, :gem_dir).and_return("/gems/foo/bar")
+
+      dm.parse(Pathname.new("."), outer_dangerfile)
+      expect(dm.status_report[:messages]).to eq(["OK"])
+    end
+
+    it "url: 'url'" do
+      outer_dangerfile = "danger.import_dangerfile(url: 'https://raw.githubusercontent.com/example/example/master/Dangerfile')"
 
       dm.parse(Pathname.new("."), outer_dangerfile)
       expect(dm.status_report[:messages]).to eq(["OK"])

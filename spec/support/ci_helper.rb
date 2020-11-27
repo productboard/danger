@@ -7,6 +7,16 @@ module Danger
         { "DANGER_GITHUB_API_TOKEN" => "1234567890" * 4 }
       end
 
+      def with_bamboo_setup_and_is_a_pull_request
+        system_env = {
+          "bamboo_buildKey" => "1",
+          "bamboo_repository_pr_key" => "33",
+          "bamboo_planRepository_repositoryUrl" => "git@github.com:danger/danger"
+        }
+
+        yield(system_env)
+      end
+
       def with_bitrise_setup_and_is_a_pull_request
         system_env = {
           "BITRISE_IO" => "true",
@@ -61,12 +71,21 @@ module Danger
         yield(system_env)
       end
 
-      def with_gitlabci_setup_and_is_a_pull_request
+      def with_gitlabci_setup_and_is_a_merge_request
         system_env = {
           "GITLAB_CI" => "true",
           "CI_PROJECT_PATH" => "danger/danger",
           "CI_MERGE_REQUEST_IID" => "42",
           "CI_MERGE_REQUEST_PROJECT_PATH" => "danger/danger"
+        }
+
+        yield(system_env)
+      end
+
+      def with_gitlabci_setup_and_is_not_a_merge_request
+        system_env = {
+          "GITLAB_CI" => "true",
+          "CI_PROJECT_PATH" => "danger/danger"
         }
 
         yield(system_env)
@@ -81,7 +100,7 @@ module Danger
         yield(system_env)
       end
 
-      def with_jenkins_setup_gitlab_and_is_a_pull_request
+      def with_jenkins_setup_gitlab_and_is_a_merge_request
         system_env = {
           "JENKINS_URL" => "https://ci.swift.org/job/oss-swift-incremental-RA-osx/lastBuild/",
           "gitlabMergeRequestIid" => "42"
@@ -90,7 +109,7 @@ module Danger
         yield(system_env)
       end
 
-      def with_jenkins_setup_gitlab_v3_and_is_a_pull_request
+      def with_jenkins_setup_gitlab_v3_and_is_a_merge_request
         system_env = {
           "JENKINS_URL" => "https://ci.swift.org/job/oss-swift-incremental-RA-osx/lastBuild/",
           "gitlabMergeRequestId" => "42"
@@ -147,7 +166,7 @@ module Danger
         yield(system_env)
       end
 
-      def with_teamcity_setup_gitlab_and_is_a_pull_request
+      def with_teamcity_setup_gitlab_and_is_a_merge_request
         system_env = {
           "TEAMCITY_VERSION" => "1.0.0",
           "GITLAB_REPO_SLUG" => "danger/danger",
