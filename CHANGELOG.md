@@ -10,9 +10,22 @@
 
 ## master
 <!-- Your comment below here -->
-* Silence the ObjectifiedHash warnings when iterating over GitLab notes. - [@dstull](https://github.com/dstull)
 
 <!-- Your comment above here -->
+
+## 8.2.3
+
+* Fix a test for Ruby 3.0 keyword arguments. - [@mataku](https://github.com/mataku)
+* Allow teriminal-table versions through 3.x - [@benasher44](https://github.com/benasher44)
+* Comment on open gitlab MRs only for Gitlab>=13.8.0 - [@asifmohd](https://github.com/asifmohd/)
+* Namespace the `Commits` class properly under `Danger`. [@rymai](https://github.com/rymai) [#1294](https://github.com/danger/danger/pull/1294)
+
+## 8.2.2
+
+* Silence the ObjectifiedHash warnings when iterating over GitLab notes. - [@dstull](https://github.com/dstull)
+* Replace `URI.escape` which is obsolete in Ruby 3. - [@mataku](https://github.com/mataku)
+* Fix run with Azure Pipelines as CI Source and Azure Repos Git as Request Source - [@damien-danglard](https://github.com/damien-danglard)
+* Delegate explicitly keyword arguments for Ruby 3. - [@mataku](https://github.com/mataku)
 
 ## 8.2.1
 
