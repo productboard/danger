@@ -56,7 +56,7 @@ module Danger
     def ensure_danger_branches_are_setup
       # clean_up
 
-      self.request_source.setup_danger_branches
+      # self.request_source.setup_danger_branches
     end
 
     def clean_up
