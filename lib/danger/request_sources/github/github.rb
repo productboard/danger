@@ -115,7 +115,7 @@ module Danger
         # OK, so we want to ensure that we have a known head branch, this will always represent
         # the head of the PR ( e.g. the most recent commit that will be merged. )
         # scm.ensure_commitish_exists_on_branch! head_branch, head_commit
-        self.scm.exec "branch #{EnvironmentManager.danger_head_branch} #{head_commit}"
+        # self.scm.exec "branch #{EnvironmentManager.danger_head_branch} #{head_commit}"
       end
 
       def fetch_details
