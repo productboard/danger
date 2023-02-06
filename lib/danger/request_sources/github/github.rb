@@ -119,6 +119,7 @@ module Danger
       end
 
       def fetch_details
+        puts "ci_source.pull_request_id: #{ci_source.pull_request_id}"
         self.pr_json = client.pull_request(ci_source.repo_slug, ci_source.pull_request_id)
         if self.pr_json["message"] == "Moved Permanently"
           raise "Repo moved or renamed, make sure to update the git remote".red

@@ -125,7 +125,8 @@ module Danger
     def commit_not_exists?(sha1)
       commit = exec("rev-parse --quiet --verify '#{sha1}^{commit}'")
       puts "rev-parse --quiet --verify #{sha1}^{commit}"
-      puts "commit: #{sha1}"
+      puts "sha1: #{sha1}"
+      puts "commit: #{commit}"
       commit.empty?
     end
 
