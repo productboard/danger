@@ -109,7 +109,7 @@ module Danger
         puts "base_commit: #{base_commit}"
         puts "head_branch: #{head_branch}"
         puts "head_commit: #{head_commit}"
-        scm.ensure_commitish_exists_on_branch! base_branch, base_commit
+        # scm.ensure_commitish_exists_on_branch! base_branch, base_commit
         self.scm.exec "branch #{EnvironmentManager.danger_base_branch} #{base_commit}"
 
         # OK, so we want to ensure that we have a known head branch, this will always represent
