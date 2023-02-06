@@ -124,10 +124,13 @@ module Danger
 
     def commit_not_exists?(sha1)
       commit = exec("rev-parse --quiet --verify '#{sha1}^{commit}'")
-      puts "rev-parse --quiet --verify #{sha1}^{commit}"
       puts "sha1: #{sha1}"
       puts "commit: #{commit}"
+      puts "Debug:"
+      puts exec("rev-parse --verify '#{sha1}^{commit}'")
+      puts exec("rev-parse --verify '#{sha1}'")
       commit.empty?
+      false
     end
 
     def find_merge_base(repo, from, to)
